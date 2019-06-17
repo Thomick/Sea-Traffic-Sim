@@ -1,0 +1,13 @@
+Organisation maritime internationale: http://www.imo.org/FR/Pages/Default.aspx
+RIPAM / COLREG : https://fr.wikipedia.org/wiki/R%C3%A8glement_international_pour_pr%C3%A9venir_les_abordages_en_mer
+
+Nombreuses références vers des papiers antérieurs : https://link.springer.com/article/10.1023/A:1022693600078
+
+Calcul resistance eau: https://www.ilephysique.net/sujet-trajectoire-d-un-navire-soumis-aux-frottements-de-l-eau-226588.html
+Inertie d'un bateau(Erre): https://www.youtube.com/watch?v=LSgWUyHKl4s
+
+Résumé techniques possibles: https://www.witpress.com/elibrary/wit-transactions-on-ecology-and-the-environment/45/4661
+
+Optimisation des trajectoires par résolution d'équations différentielles: http://www.mic-journal.no/PDF/1982/MIC-1982-4-2.pdf (Plus vieux papier 1982)
+
+Utilisation de logique floue(fuzzy logic) dans la réalisation de stratégies d'évitement : https://www.hindawi.com/journals/afs/2018/2367096/

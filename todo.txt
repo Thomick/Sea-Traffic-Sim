@@ -1,0 +1,23 @@
+A inclure dans la simulation:
+-> Visualisation plus claire et agréable
+
+-> Comportement physique réaliste:
+    Frottement fluide de l'eau en -av^3
+    Moment résistant de l'eau (Se renseigner)
+    Influence masse bateaux
+
+-> Evènement lors d'une collision (Peut-etre arret de la simulation)
+
+-> Obstacles fixes
+
+-> Affichage prévisionnel de la trajectoire choisie (ou pas alors laissé affichage trainé a la fin)
+
+-> Utilisation plus facile (Trouver autre module ou logiciel permettant plus de flexibilité d'expérimentation)
+
+Après fin création de l'environnement:
+-> Créer situations types
+
+-> Implémenter stratégies:
+    1) Règles RIPAM
+    2) Par résolution d'équation différentiel
+    3) Apprentissage machine
