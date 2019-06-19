@@ -2,9 +2,16 @@ A inclure dans la simulation:
 -> Visualisation plus claire et agréable
 
 -> Comportement physique réaliste:
-    Frottement fluide de l'eau en -av^3
-    Moment résistant de l'eau (Se renseigner)
-    Influence masse bateaux
+    Frottement fluide de l'eau en -av^2  OK
+    Moment résistant de l'eau (Se renseigner)  OK
+    Influence masse bateaux  OK
+    Conversion et mise à l"échelle OK
+    Choix pertinent d'échelle
+    Ajout de paramètres relatifs au bateaux :
+        Coefficientde trainé Cx
+        Taille
+        Surface de référence (eventuellemnt calculé en fct e la taille du navire)
+        Masse volumique de l'eau (Constante à trouver)
 
 -> Evènement lors d'une collision (Peut-etre arret de la simulation)
 
@@ -18,6 +25,8 @@ Après fin création de l'environnement:
 -> Créer situations types
 
 -> Implémenter stratégies:
+    0) Commandes basiques :
+        Aller au point (Commande progressive en fonction de l'angle)
     1) Règles RIPAM
     2) Par résolution d'équation différentiel
     3) Apprentissage machine

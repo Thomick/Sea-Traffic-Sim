@@ -1,6 +1,14 @@
 import numpy as np
 
 
+def scale_convert_vector(v, scale):
+    return np.around(v * scale)
+
+
+def distance(A, B):
+    return np.linalg.norm(A - B)
+
+
 def random_point_on_edge(rect):
     rand_pos = [0, 0]
     width, height = rect.width, rect.height
