@@ -21,7 +21,7 @@ if display:
     boatFile = "Images/boat2.png"
     disp = SimDisplay(screen_size, boatFile)
     disp.initDisplay(boats, scale_factor, targets)
-    disp.runSim(100)
+    disp.runSim(1000)
 
 else:
     for i in range(1000):

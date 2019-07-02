@@ -20,7 +20,10 @@ A inclure dans la simulation:
 
 -> Obstacles fixes (Plus tard : bateau immobile)
 
--> Affichage prévisionnel de la trajectoire choisie par simulation des prochains mouvement
+-> Affichage prévisionnel de la trajectoire choisie par simulation des prochains mouvement OK
+    Creation d'un bateau phantom suivant les memes regles que l'original OK
+    Utiliser fichier config bateau pour copier les parametres dans le phantom
+    Envisager les changement de trajectoire
 
 -> Utilisation plus facile : fichier config pour les différentes configurations testées
 
@@ -37,5 +40,5 @@ Après fin création de l'environnement:
 
 -> Visualisations variables (matplotlib)
 
--> Classes de bateaux dérivés: pat stratégie et par taille
+-> Classes de bateaux dérivés: par stratégie et par taille ou lecture du fichier config passé en parametre
 

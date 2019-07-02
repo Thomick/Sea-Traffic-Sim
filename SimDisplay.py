@@ -58,15 +58,16 @@ class SimDisplay():
                             print("Collision")
                             paused = True
 
-                if i % 10 == 0:
-                    for boat in self.boatGroup:
-                        boat.save_pos()
-
                 self.boatGroup.update()
                 self.boatGroup.draw(self.screen)
                 for t in self.targets:
-                    pg.draw.circle(
-                        self.screen, RED, scale_convert_vector(t, self.scale_factor), 5)
+                    pos = scale_convert_vector(t, self.scale_factor)
+                    pg.draw.circle(self.screen, RED, pos, 5)
+
+                for b in self.boatGroup:
+                    for p in b.boat.phantom_boat.pastTrajectory:
+                        pos = scale_convert_vector(p, self.scale_factor)
+                        pg.draw.circle(self.screen, RED, pos, 5)
 
                 pg.display.flip()
                 i += 1
