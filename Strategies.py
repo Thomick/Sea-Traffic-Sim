@@ -8,3 +8,6 @@ def follow_target(boat, target):
     BT_norm = BT / np.linalg.norm(BT)
     det = boat.dir[0] * BT_norm[1] - boat.dir[1] * BT_norm[0]
     boat.cape = -det / (1 + abs(boat.angular_speed))
+
+def controlled(boat, target): #Do nothing
+    return None

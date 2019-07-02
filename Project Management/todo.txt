@@ -1,0 +1,41 @@
+A inclure dans la simulation:
+-> Visualisation plus claire et agréable OK
+
+-> Comportement physique réaliste:
+    Frottement fluide de l'eau en -av^2  OK
+    Moment résistant de l'eau (Se renseigner)  OK
+    Influence masse bateaux  OK
+    Conversion et mise à l"échelle OK
+    Choix pertinent d'échelle
+    Ajout de paramètres relatifs au bateaux :
+        Coefficientde trainé Cx
+        Taille
+        Surface de référence (eventuellemnt calculé en fct e la taille du navire)
+        Masse volumique de l'eau (Constante à trouver)
+    Changement de timestep pour plus de precision (configurable)
+
+-> Evènement lors d'une collision (Peut-etre arret de la simulation) OK
+    Revoir collision : circular bounding box
+    Zone de sécurité : egalement circulaire autour du bateau
+
+-> Obstacles fixes (Plus tard : bateau immobile)
+
+-> Affichage prévisionnel de la trajectoire choisie par simulation des prochains mouvement
+
+-> Utilisation plus facile : fichier config pour les différentes configurations testées
+
+Après fin création de l'environnement:
+-> Créer situations types
+
+-> Implémenter stratégies:
+    0) Commandes basiques :
+        Aller au point (Commande progressive en fonction de l'angle) OK
+    1) Règles RIPAM (solution naive : si collision future, detournement de la trajectoire)
+    2) Par résolution d'équation différentiel
+    3) Tabu search (voir doc)
+    4) Apprentissage machine
+
+-> Visualisations variables (matplotlib)
+
+-> Classes de bateaux dérivés: pat stratégie et par taille
+

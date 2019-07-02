@@ -3,29 +3,54 @@ import numpy as np
 from Utils import *
 from TStructure import Queue
 from Strategies import *
-from TNeuralNetwork import *
 
 
-class Boat(pg.sprite.Sprite):
-    def __init__(self, filename, scale_factor, boatName, nav_strat, start, target, starting_speed=(0, 0), starting_angle=-90):
+class BoatSprite(pg.sprite.Sprite):
+    def __init__(self, filename, scale_factor, boat):
         super().__init__()
+        self.boat = boat
         self.original_image = pg.image.load(filename)
         self.image = self.original_image
         self.scale_factor = scale_factor
         self.rect = self.image.get_rect()
+        self.rect.center = scale_convert_vector(
+            self.boat.pos, self.scale_factor)
+
+    def __del__(self):
+        del self.boat
+
+    def update(self):
+        self.boat.update()
+        self.image = pg.transform.rotate(self.original_image, self.boat.angle)
+        self.rect = self.image.get_rect()
+        intPos = scale_convert_vector(self.boat.pos, self.scale_factor)
+        self.rect.center = intPos
+
+    def draw_trajectory(self, screen):
+        if len(self.boat.pastTrajectory) > 1:
+            convTraj = scale_convert_vector(
+                self.boat.pastTrajectory.to_list(), self.scale_factor)
+            pg.draw.lines(screen, (255, 0, 0), False, convTraj, 1)
+
+    def save_pos(self):
+        self.boat.save_pos()
+
+
+class Boat():
+    def __init__(self, boatName, nav_strat, start, targets, starting_speed=(0, 0), starting_angle=-90):
         self.name = boatName
         self.start = np.array(start, dtype=int)
         self.pos = np.array(start, dtype=float)
-        self.rect.center = self.pos
         self.angle = starting_angle
         self.angular_speed = 0
         self.speed = np.array(starting_speed, dtype=float)
-        self.target = np.array(target, dtype=int)
+        self.next_targets = Queue(targets)
+        self.target = np.array(self.next_targets.pop(), dtype=int)
         self.target_reached = False
         self.engine_on = True
         self.gear = 1
         self.reverse = False
-        self.thrust_power = 40
+        self.thrust_power = 70
         self.mass = 700
         self.cape = 0
         self.pastTrajectory = Queue()
@@ -34,23 +59,16 @@ class Boat(pg.sprite.Sprite):
 
     def update(self):
         if distance(self.target, self.pos) < 15:
-            self.target_reached = True
+            if len(self.next_targets) == 0:
+                self.target_reached = True
+                self.cape = 0
+                self.gear = 0
+            else:
+                self.target = np.array(self.next_targets.pop(), dtype=int)
         if not self.target_reached:
             self.nav_strat(self, self.target)
             self.update_angle()
             self.update_speed()
-        self.image = pg.transform.rotate(self.original_image, self.angle)
-        self.rect = self.image.get_rect()
-        intPos = scale_convert_vector(self.pos, self.scale_factor)
-        self.rect.center = intPos
-        self.pastTrajectory.append(intPos)
-        if len(self.pastTrajectory) > 500:
-            _ = self.pastTrajectory.pop()
-
-    def draw_trajectory(self, screen):
-        if len(self.pastTrajectory) > 1:
-            pg.draw.lines(screen, (255, 0, 0), False,
-                          self.pastTrajectory.to_list(), 1)
 
     def update_speed(self):
         if self.engine_on:
@@ -61,14 +79,14 @@ class Boat(pg.sprite.Sprite):
         speedNorm = np.linalg.norm(self.speed)
         # Frottements fluides
         if speedNorm > 0:
-            self.speed -= 10 / self.mass * speedNorm * self.speed
+            self.speed -= 10 * speedNorm * self.speed / self.mass
         elif speedNorm < 0:
-            self.speed -= 10 / self.mass * speedNorm * self.speed
+            self.speed -= 10 * speedNorm * self.speed / self.mass
         self.pos = self.pos + self.speed
 
     def update_angle(self):
-        self.angular_speed += 10 * self.cape / self.mass
-        self.angular_speed -= 3 / self.mass * self.angular_speed
+        self.angular_speed += 2 * self.thrust_power * self.cape / self.mass * self.gear
+        self.angular_speed -= 100 / self.mass * self.angular_speed * self.gear
         self.angle += self.angular_speed
         angleRad = (self.angle + 90) * np.pi / 180
         self.dir = np.array([np.cos(angleRad), -np.sin(angleRad)])
@@ -80,14 +98,7 @@ class Boat(pg.sprite.Sprite):
     def angle_with_target(self):
         return None  # TODO
 
-
-def BoatNN(Boat):
-    def __init__(self, filename, scale_factor, boatName, NNType, weigths, start, target, starting_speed=(0, 0), starting_angle=-90):
-        self.weigths = weigths
-        self.NNType = NNType
-        super().__init__(filename, scale_factor, boatName, nav_strat,
-                         start, target, starting_speed, starting_angle)
-
-    def nextCape(self)
-        Ninput = [self.pos[0], self.pos[2], self.speed[0], self.speed[1],
-                  self.angle, self.angular_speed, self.angle_with_target]
+    def save_pos(self):
+        self.pastTrajectory.append(self.pos)
+        if len(self.pastTrajectory) > 1000:
+            _ = self.pastTrajectory.pop()

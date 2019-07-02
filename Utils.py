@@ -2,7 +2,7 @@ import numpy as np
 
 
 def scale_convert_vector(v, scale):
-    return np.around(v * scale)
+    return np.around(np.array(v) * scale).astype(int)
 
 
 def distance(A, B):

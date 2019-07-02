@@ -17,10 +17,18 @@ Calcul resistance eau: https://www.ilephysique.net/sujet-trajectoire-d-un-navire
 Inertie d'un bateau(Erre): https://www.youtube.com/watch?v=LSgWUyHKl4s
 Cours: https://www.ladissertation.com/Monde-du-Travail/Flexibilite-du-Travail/LINERTIE-DU-NAVIRE-287638.html
 
+Simulation très proche de l'objectif: (!!!!) https://www-sciencedirect-com.lama.univ-amu.fr/science/article/pii/S0029801811002514
+Autonomous Ship Collision Avoidance Navigation Concepts, Technologies and Techniques: https://www-cambridge-org.lama.univ-amu.fr/core/journals/journal-of-navigation/article/autonomous-ship-collision-avoidance-navigation-concepts-technologies-and-techniques/3F3ED13DEFF7B84B5B0A758BEBF47ADD
 Résumé techniques possibles: https://www.witpress.com/elibrary/wit-transactions-on-ecology-and-the-environment/45/4661
 
 Evitement d'obstacles fixes par l'utilisation de champs de vecteur: http://publish.illinois.edu/dpanagou/files/2014/07/Panagou_ICRA_14.pdf
 
+##### Differential game modelisation #####
+(!!!)https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7909033
 Optimisation des trajectoires par résolution d'équations différentielles: http://www.mic-journal.no/PDF/1982/MIC-1982-4-2.pdf (Plus vieux papier 1982)
 
-Utilisation de logique floue(fuzzy logic) dans la réalisation de stratégies d'évitement : https://www.hindawi.com/journals/afs/2018/2367096/
+Utilisation de logique floue(fuzzy logic)(Lien NN) dans la réalisation de stratégies d'évitement : https://www.hindawi.com/journals/afs/2018/2367096/
+
+Maritime Trajectory Negotiation forn-Vessel Collision Avoidance: https://uol.de/fileadmin/user_upload/informatik/hormar16.pdf
+
+Tabu search: https://explore.openaire.eu/search/publication?articleId=doajarticles::d1cd604573689ff1b75c22a0070dfa1c
