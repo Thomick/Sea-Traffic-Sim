@@ -1,40 +1,8 @@
-import pygame as pg
 import numpy as np
 from Utils import *
 from TStructure import Queue
 from Strategies import *
 import copy
-
-
-class BoatSprite(pg.sprite.Sprite):
-    def __init__(self, filename, scale_factor, boat):
-        super().__init__()
-        self.boat = boat
-        self.original_image = pg.image.load(filename)
-        self.image = self.original_image
-        self.scale_factor = scale_factor
-        self.rect = self.image.get_rect()
-        self.rect.center = scale_convert_vector(
-            self.boat.pos, self.scale_factor)
-
-    def __del__(self):
-        del self.boat
-
-    def update(self):
-        self.boat.update()
-        self.image = pg.transform.rotate(self.original_image, self.boat.angle)
-        self.rect = self.image.get_rect()
-        intPos = scale_convert_vector(self.boat.pos, self.scale_factor)
-        self.rect.center = intPos
-
-    def draw_trajectory(self, screen):
-        if len(self.boat.pastTrajectory) > 1:
-            convTraj = scale_convert_vector(
-                self.boat.pastTrajectory.to_list(), self.scale_factor)
-            pg.draw.lines(screen, (255, 0, 0), False, convTraj, 1)
-
-    def save_pos(self):
-        self.boat.save_pos()
 
 
 class Boat():
@@ -62,24 +30,23 @@ class Boat():
         self.dir = np.array([np.cos(angleRad), -np.sin(angleRad)])
         self.nav_strat = nav_strat
         self.is_phantom = False
-        self.phantom_boat = None
         self.reset_history()
         self.max_step_history = 1000
         self.save_delay = 10
+        self.colRadius = 10
         print(f'{self.name} created')
+        self.reset_phantom()
 
     def update(self):
         if not self.is_phantom:
-            if self.phantom_boat == None or self.total_step % 1000 == 0:
+            if self.phantom_boat == None:
                 self.reset_phantom()
             else:
                 self.phantom_boat.update()
 
         if not self.target_reached:
             self.nav_strat(self, self.target)
-            self.update_angle()
-            self.update_speed()
-            if distance(self.target, self.pos) < 15:
+            if distance(self.target, self.pos) < self.colRadius:
                 if len(self.next_targets) == 0:
                     self.target = None
                     self.target_reached = True
@@ -87,6 +54,10 @@ class Boat():
                     self.gear = 0
                 else:
                     self.target = np.array(self.next_targets.pop(), dtype=int)
+        else:
+            gear = 0
+        self.update_angle()
+        self.update_speed()
         if self.total_step % self.save_delay == 0:
             self.save_pos()
         self.total_step += 1
@@ -94,20 +65,17 @@ class Boat():
     def update_speed(self):
         if self.engine_on:
             if self.reverse:
-                self.speed -= self.thrust_power / self.mass * self.gear * self.dir
+                self.speed -= 0.1 * self.thrust_power / self.mass * self.gear * self.dir
             else:
-                self.speed += self.thrust_power / self.mass * self.gear * self.dir
+                self.speed += 0.1 * self.thrust_power / self.mass * self.gear * self.dir
         speedNorm = np.linalg.norm(self.speed)
         # Frottements fluides
-        if speedNorm > 0:
-            self.speed -= 10 * speedNorm * self.speed / self.mass
-        elif speedNorm < 0:
-            self.speed -= 10 * speedNorm * self.speed / self.mass
+        self.speed -= 10 * speedNorm * self.speed / self.mass
         self.pos = self.pos + self.speed
 
     def update_angle(self):
         self.angular_speed += 2 * self.thrust_power * self.cape / self.mass * self.gear
-        self.angular_speed -= 100 / self.mass * self.angular_speed * self.gear
+        self.angular_speed -= 100 / self.mass * self.angular_speed
         self.angle += self.angular_speed
         angleRad = (self.angle + 90) * np.pi / 180
         self.dir = np.array([np.cos(angleRad), -np.sin(angleRad)])
@@ -152,6 +120,7 @@ class PhantomBoat(Boat):
         self.is_phantom = True
         self.phantom_boat = None
         self.reset_history()
-        self.max_step_history = 9
-        self.save_delay = 100
+        self.max_step_history = 1000
+        self.save_delay = 1
+        self.colRadius = boat.colRadius
         print(f'Phantom of {self.name} created')

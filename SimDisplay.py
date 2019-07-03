@@ -1,5 +1,6 @@
-from Ocean import *
+from Boats import *
 from Utils import *
+from BoatFunctions import *
 import pygame as pg
 from pygame.locals import *
 import time
@@ -7,6 +8,8 @@ import time
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
 
 
 class SimDisplay():
@@ -49,27 +52,69 @@ class SimDisplay():
                     '''
                     boat.draw_trajectory(self.screen)
 
-                # collisions
+                # prevision de collision
+                '''
                 col = pg.sprite.groupcollide(
-                    self.boatGroup, self.boatGroup, False, False)
+                    self.boatGroup, self.boatGroup, False, False, sprite_prev_collision)
                 for b1 in col:
                     for b2 in col[b1]:
                         if not(b1 is b2):
-                            print("Collision")
+                            print("Collision prévue")
                             paused = True
+                '''
 
                 self.boatGroup.update()
+                for b in self.boatGroup:
+                    j = 0
+                    for p in b.boat.phantom_boat.pastTrajectory:
+                        if j % 100 == 0:
+                            pos = scale_convert_vector(p, self.scale_factor)
+                            pg.draw.circle(self.screen, BLUE, pos, 5)
+                        j += 1
                 self.boatGroup.draw(self.screen)
                 for t in self.targets:
                     pos = scale_convert_vector(t, self.scale_factor)
                     pg.draw.circle(self.screen, RED, pos, 5)
 
-                for b in self.boatGroup:
-                    for p in b.boat.phantom_boat.pastTrajectory:
-                        pos = scale_convert_vector(p, self.scale_factor)
-                        pg.draw.circle(self.screen, RED, pos, 5)
-
                 pg.display.flip()
                 i += 1
             clock.tick(framerate)
         pg.quit()
+
+
+class BoatSprite(pg.sprite.Sprite):
+    def __init__(self, filename, scale_factor, boat, scale_icon=False):
+        super().__init__()
+        self.boat = boat
+        self.scale_factor = scale_factor
+        self.size = int(self.boat.colRadius * self.scale_factor)
+        self.original_image = pg.image.load(filename)
+        if scale_icon:
+            im_size = self.original_image.get_size()
+            self.scaled_image = pg.transform.scale(
+                self.original_image, (self.size, int(self.size * im_size[1] / im_size[0])))
+        else:
+            self.scaled_image = self.original_image
+        self.image = self.original_image
+        self.rect = self.image.get_rect()
+        self.rect.center = scale_convert_vector(
+            self.boat.pos, self.scale_factor)
+
+    def __del__(self):
+        del self.boat
+
+    def update(self):
+        self.boat.update()
+        self.image = pg.transform.rotate(self.scaled_image, self.boat.angle)
+        self.rect = self.image.get_rect()
+        intPos = scale_convert_vector(self.boat.pos, self.scale_factor)
+        self.rect.center = intPos
+
+    def draw_trajectory(self, screen):
+        if len(self.boat.pastTrajectory) > 1:
+            convTraj = scale_convert_vector(
+                self.boat.pastTrajectory.to_list(), self.scale_factor)
+            pg.draw.lines(screen, (255, 0, 0), False, convTraj, 1)
+
+    def save_pos(self):
+        self.boat.save_pos()
