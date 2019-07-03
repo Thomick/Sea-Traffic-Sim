@@ -24,4 +24,5 @@ def prev_collision(boat1, boat2, step=1):
 
 
 def sprite_prev_collision(boat_sprite1, boat_sprite2):
-    return prev_collision(boat_sprite1.boat, boat_sprite2.boat, step=1000)[0]
+    col, j = prev_collision(boat_sprite1.boat, boat_sprite2.boat, step=100)
+    return col

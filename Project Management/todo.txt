@@ -15,7 +15,7 @@ A inclure dans la simulation:
     Changement de timestep pour plus de precision (configurable)
 
 -> Evènement lors d'une collision (Peut-etre arret de la simulation) OK
-    Revoir collision : circular bounding box
+    Revoir collision : circular bounding box OK
     Zone de sécurité : egalement circulaire autour du bateau
 
 -> Obstacles fixes (Plus tard : bateau immobile)
@@ -25,7 +25,7 @@ A inclure dans la simulation:
     Utiliser fichier config bateau pour copier les parametres dans le phantom
     Envisager les changement de trajectoire
 
--> Utilisation plus facile : fichier config pour les différentes configurations testées
+-> Utilisation plus facile : fichier config pour les différentes configurations testées(Editeur de scene)
 
 Après fin création de l'environnement:
 -> Créer situations types

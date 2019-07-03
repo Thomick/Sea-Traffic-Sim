@@ -6,7 +6,7 @@ import copy
 
 
 class Boat():
-    def __init__(self, boatName, nav_strat, start, targets, starting_speed=(0, 0), starting_angle=-90, angular_speed=0, mass=700):
+    def __init__(self, boatName, nav_strat, avoid_strat, start, targets, starting_speed=(0, 0), starting_angle=-90, angular_speed=0, mass=700):
         self.name = boatName
         self.start = np.array(start, dtype=int)
         self.pos = np.array(start, dtype=float)
@@ -28,12 +28,16 @@ class Boat():
         self.cape = 0
         angleRad = (self.angle + 90) * np.pi / 180
         self.dir = np.array([np.cos(angleRad), -np.sin(angleRad)])
-        self.nav_strat = nav_strat
+        self.common_nav_strat = nav_strat
+        self.avoid_strat = avoid_strat
+        self.nav_strat = strat_or_maneuver
+        self.maneuver = []
         self.is_phantom = False
+        self.phantom_advance = 300
         self.reset_history()
         self.max_step_history = 1000
         self.save_delay = 10
-        self.colRadius = 10
+        self.colRadius = 20
         print(f'{self.name} created')
         self.reset_phantom()
 
@@ -93,13 +97,20 @@ class Boat():
         self.pastTrajectory = Queue()
 
     def reset_phantom(self):
-        self.phantom_boat = PhantomBoat(self)
-        for i in range(1001):
+        self.phantom_boat = PhantomBoat(self, self.phantom_advance)
+        for i in range(self.phantom_advance):
             self.phantom_boat.update()
+
+    def establish_maneuver(self):
+        if not self.target_reached:
+            self.avoid_strat(self)
+            self.reset_phantom()
+            return True
+        return False
 
 
 class PhantomBoat(Boat):
-    def __init__(self, boat):
+    def __init__(self, boat, advance):
         self.name = boat.name
         self.start = boat.start
         self.pos = copy.copy(boat.pos)
@@ -116,11 +127,13 @@ class PhantomBoat(Boat):
         self.mass = boat.mass
         self.cape = boat.cape
         self.dir = copy.copy(boat.dir)
-        self.nav_strat = boat.nav_strat
+        self.common_nav_strat = boat.common_nav_strat
+        self.nav_strat = strat_or_maneuver
+        self.maneuver = copy.deepcopy(boat.maneuver)
         self.is_phantom = True
         self.phantom_boat = None
         self.reset_history()
-        self.max_step_history = 1000
+        self.max_step_history = advance
         self.save_delay = 1
         self.colRadius = boat.colRadius
         print(f'Phantom of {self.name} created')

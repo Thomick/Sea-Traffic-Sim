@@ -53,16 +53,21 @@ class SimDisplay():
                     boat.draw_trajectory(self.screen)
 
                 # prevision de collision
-                '''
-                col = pg.sprite.groupcollide(
-                    self.boatGroup, self.boatGroup, False, False, sprite_prev_collision)
-                for b1 in col:
-                    for b2 in col[b1]:
-                        if not(b1 is b2):
-                            print("Collision prévue")
-                            paused = True
-                '''
-
+                is_colliding = True
+                while is_colliding:
+                    is_colliding = False
+                    col = pg.sprite.groupcollide(
+                        self.boatGroup, self.boatGroup, False, False, sprite_prev_collision)
+                    for b1 in col:
+                        for b2 in col[b1]:
+                            if not(b1 is b2):
+                                print("Collision prévue")
+                                changed = b1.boat.establish_maneuver()
+                                if changed:
+                                    is_colliding = True
+                                    break
+                        if is_colliding:
+                            break
                 self.boatGroup.update()
                 for b in self.boatGroup:
                     j = 0
