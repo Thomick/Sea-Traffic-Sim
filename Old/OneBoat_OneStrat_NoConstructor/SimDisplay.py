@@ -51,19 +51,18 @@ class SimDisplay():
                         done = True
                     '''
                     boat.draw_trajectory(self.screen)
-                '''
-                # collision
+
+                # prevision de collision
                 is_colliding = True
                 while is_colliding:
                     is_colliding = False
                     col = pg.sprite.groupcollide(
-                        self.boatGroup, self.boatGroup, False, False, sprite_collide)
+                        self.boatGroup, self.boatGroup, False, False, sprite_prev_collision)
                     for b1 in col:
                         for b2 in col[b1]:
                             if not(b1 is b2):
-                                print("Collision !")
-                                paused = True
-                '''
+                                print("Collision prévue")
+                                changed = b1.boat.establish_maneuver()
 
                 self.boatGroup.update()
                 for b in self.boatGroup:
@@ -77,11 +76,6 @@ class SimDisplay():
                 for t in self.targets:
                     pos = scale_convert_vector(t, self.scale_factor)
                     pg.draw.circle(self.screen, RED, pos, 5)
-
-                for b in self.boats:
-                    if b.isColliding:
-                        #paused = True
-                        pass
 
                 pg.display.flip()
                 i += 1

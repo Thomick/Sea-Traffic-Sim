@@ -9,14 +9,14 @@ from SimDisplay import *
 display = True
 
 # Environment definition
-targets = [(800, 300), (200, 300), (500, 200)]
+targets = [(800, 200), (200, 200)]
 boats = []
 boat1 = buildBoat("BoatConfig/testboat.txt",
-                  {'pos': (200, 300), 'angle': -90, 'gear': 3}, [targets[0]], name="Titanic")
+                  {'pos': (100, 200), 'angle': -90, 'gear': 3}, [targets[0]], name="Titanic")
 boat2 = buildBoat("BoatConfig/testboat.txt",
-                  {'pos': (800, 300), 'angle': 90}, [targets[1]], name="CDG")
+                  {'pos': (800, 200), 'angle': 90}, [targets[1]], name="CDG")
 boat3 = buildBoat("BoatConfig/testboat.txt",
-                  {'pos': (500, 600)}, [targets[2]], name="USS Thomas")
+                  {'pos': (400, 200), 'angle': -90}, [targets[0]], name="USS Thomas")
 boats.append(boat1)
 boats.append(boat2)
 boats.append(boat3)

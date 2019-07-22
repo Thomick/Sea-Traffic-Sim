@@ -11,7 +11,7 @@ def sprite_collide(boat_sprite1, boat_sprite2):
     return collide(boat_sprite1.boat, boat_sprite2.boat)
 
 
-def prev_collision(boat1, boat2, step=100):
+def prev_collision(boat1, boat2, step=1):
     next_pos1 = boat1.phantom_boat.pastTrajectory.to_list()
     next_pos2 = boat2.phantom_boat.pastTrajectory.to_list()
     nb_pos = min(len(next_pos1), len(next_pos2)) - 1

@@ -9,7 +9,7 @@ from SimDisplay import *
 display = True
 
 # Environment definition
-targets = [(800, 300), (200, 300), (500, 200)]
+targets = [(800, 200), (200, 200), (500, 200)]
 boats = []
 boat1 = buildBoat("BoatConfig/testboat.txt",
                   {'pos': (200, 300), 'angle': -90, 'gear': 3}, [targets[0]], name="Titanic")

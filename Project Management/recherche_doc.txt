@@ -32,3 +32,10 @@ Utilisation de logique floue(fuzzy logic)(Lien NN) dans la réalisation de strat
 Maritime Trajectory Negotiation forn-Vessel Collision Avoidance: https://uol.de/fileadmin/user_upload/informatik/hormar16.pdf
 
 Tabu search: https://explore.openaire.eu/search/publication?articleId=doajarticles::d1cd604573689ff1b75c22a0070dfa1c
+
+Même problematique pour des drones aeriens: https://www.researchgate.net/publication/273277742_Collision_avoidance_for_aerial_vehicles_in_multi-agent_scenarios
+
+(!!!!!)Deep RL Evitement de collision decentralisé sans communication: 
+https://arxiv.org/pdf/1609.07845.pdf
+
+Optimal Reciprocal Collision Avoidance : http://gamma.cs.unc.edu/ORCA/publications/ORCA.pdf
