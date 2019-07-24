@@ -17,15 +17,8 @@ def follow_target(boat):
 
 
 def go_right_maneuver(boat):
-    for i in range(2):
+    for i in range(3):
         boat.maneuver.append(-1)
-
-
-def strat_or_maneuver(boat):
-    if len(boat.maneuver) > 0:
-        boat.cape = boat.maneuver.pop()
-    else:
-        boat.common_nav_strat(boat)
 
 
 def controlled(boat, target):  # Do nothing

@@ -1,16 +1,18 @@
-class Node_2L:
+class Node_2L():
     def __init__(self, data, prev=None, nxt=None):
         self.data = data
         self.prev = prev
         self.nxt = nxt
 
 
-class Queue:
+class Queue():
     head = None
     tail = None
     length = 0
+    max_length = -1
 
-    def __init__(self, lst=[]):
+    def __init__(self, lst=[], max_lentgh=None):
+        self.max_lentgh = max_lentgh
         if lst:
             for i in lst:
                 self.append(i)
@@ -43,6 +45,8 @@ class Queue:
             newNode.nxt = self.head
             self.head = newNode
         self.length += 1
+        if self.length == self.max_length + 1:
+            self.pop()
 
     def pop(self):
         elt = self.peek()

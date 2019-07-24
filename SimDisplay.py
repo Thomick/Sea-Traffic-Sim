@@ -27,11 +27,36 @@ class SimDisplay():
             self.boatGroup.add(bSprite)
         self.targets = targets
         self.screen = pg.display.set_mode(self.screen_size)
+    
+    def step(self):
+        self.screen.fill(WHITE)
+        for boat in self.boatGroup:
+            boat.draw_trajectory(self.screen)
 
-    def runSim(self, framerate):
+        self.boatGroup.update()
+        '''
+        for b in self.boatGroup:
+            j = 0
+            for p in b.boat.phantom_boat.pastTrajectory:
+                if j % 100 == 0:
+                    pos = scale_convert_vector(p, self.scale_factor)
+                    pg.draw.circle(self.screen, BLUE, pos, 5)
+                j += 1
+        '''
+        self.boatGroup.draw(self.screen)
+        for t in self.targets:
+            pos = scale_convert_vector(t, self.scale_factor)
+            pg.draw.circle(self.screen, RED, pos, 5)
+
+        for b in self.boats:
+            if b.isColliding:
+                #paused = True
+                pass
+        pg.display.flip()
+
+    def runSim(self, framerate = 60, nb_step = -1,pause_on_start = True):
         done = False
         clock = pg.time.Clock()
-        t1 = time.time()
         paused = False
         i = 0
         while not done:
@@ -43,51 +68,13 @@ class SimDisplay():
                         paused = not paused
 
             if not paused:
-                self.screen.fill(WHITE)
-                for boat in self.boatGroup:
-                    '''
-                    if boat.boat.target_reached:
-                        print(time.time() - t1)
-                        done = True
-                    '''
-                    boat.draw_trajectory(self.screen)
-                '''
-                # collision
-                is_colliding = True
-                while is_colliding:
-                    is_colliding = False
-                    col = pg.sprite.groupcollide(
-                        self.boatGroup, self.boatGroup, False, False, sprite_collide)
-                    for b1 in col:
-                        for b2 in col[b1]:
-                            if not(b1 is b2):
-                                print("Collision !")
-                                paused = True
-                '''
-
-                self.boatGroup.update()
-                for b in self.boatGroup:
-                    j = 0
-                    for p in b.boat.phantom_boat.pastTrajectory:
-                        if j % 100 == 0:
-                            pos = scale_convert_vector(p, self.scale_factor)
-                            pg.draw.circle(self.screen, BLUE, pos, 5)
-                        j += 1
-                self.boatGroup.draw(self.screen)
-                for t in self.targets:
-                    pos = scale_convert_vector(t, self.scale_factor)
-                    pg.draw.circle(self.screen, RED, pos, 5)
-
-                for b in self.boats:
-                    if b.isColliding:
-                        #paused = True
-                        pass
-
-                pg.display.flip()
+                self.step()
                 i += 1
             clock.tick(framerate)
-            if i == 1:
+            if pause_on_start and i == 1:
                 paused = True
+            if i == nb_step:
+                done = True
         pg.quit()
 
 

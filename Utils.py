@@ -9,24 +9,47 @@ def distance(A, B):
     return np.linalg.norm(A - B)
 
 
-def random_point_on_edge(rect):
-    rand_pos = [0, 0]
-    x, y = rect[0], rect[1]
+def unit_vector(V):
+    return V / np.linalg.norm(V)
+
+
+def angle_between(A, B):
+    A_u = unit_vector(A)
+    B_u = unit_vector(B)
+    # Attention angle en radians
+    return np.arccos(np.clip(np.dot(A_u, B_u), -1.0, 1.0))
+
+
+def scalar_to_coord_on_edge(rect, p):
+    pos = [rect[0], rect[1]]
     width, height = rect[2], rect[3]
-    p = np.random.randint(0, 2 * width + 2 * height)
+    p = p * (2 * width + 2 * height)
     if p < (width + height):
         if p < width:
-            rand_pos[0] = x + p
-            rand_pos[1] = y
+            pos[0] += p
         else:
-            rand_pos[0] = x + width
-            rand_pos[1] = y + p - width
+            pos[0] += width
+            pos[1] += p - width
     else:
         p = p - (width + height)
         if p < width:
-            rand_pos[0] = x + width - p
-            rand_pos[1] = y + height
+            pos[0] += width - p
+            pos[1] += height
         else:
-            rand_pos[0] = x
-            rand_pos[1] = y + height - (p - width)
-    return rand_pos
+            pos[1] += height - (p - width)
+    return pos
+
+
+def random_point_on_edge(rect):
+    p = np.random.random()
+    pos = scalar_to_coord_on_edge(rect, p)
+    return pos
+
+
+def evenly_spaced_points_on_edge(rect, nbPoints):
+    p = np.linspace(0, 1, nbPoints + 1)[:nbPoints]
+    pos = []
+    for s in p:
+        pos.append(scalar_to_coord_on_edge(rect, s))
+    print(len(pos))
+    return pos

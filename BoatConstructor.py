@@ -1,4 +1,5 @@
 from Boats import *
+from RLStrategy import *
 
 
 def buildBoat(file, initState, targets, name=None):
@@ -15,6 +16,8 @@ def buildBoat(file, initState, targets, name=None):
         return Boat(param, defInitState, targets)
     elif param['boatType'] == 'TRBoat':
         return TRBoat(param, defInitState, targets)
+    elif param['boatType'] == 'DQNBoat':
+        return DQNBoat(param, defInitState, targets)
 
 
 def readParam(file):
@@ -27,7 +30,9 @@ def readParam(file):
         if len(l) > 1:
             a, b = l.split("=")
             try:
-                param[a] = int(b)
+                param[a] = float(b)
+                if param[a] == int(param[a]):
+                    param[a] = int(param[a])
             except:
                 param[a] = b
     return param

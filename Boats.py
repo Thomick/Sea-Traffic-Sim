@@ -18,17 +18,17 @@ class Boat():
             self.target = np.array(self.next_targets.pop(), dtype=float)
             self.target_reached = False
         else:
-            self.target = None
+            self.target = self.pos
             self.target_reached = True
         self.engine_on = initState['engine_on']
         self.gear = initState['gear']
+        self.max_gear = param['max_gear']
         self.reverse = initState['reverse']
         self.thrust_power = param['thrust_power']
         self.mass = param['mass']
         self.cape = initState['cape']
         angleRad = (self.angle + 90) * np.pi / 180
         self.dir = np.array([np.cos(angleRad), -np.sin(angleRad)])
-        self.nav_strat = lambda boat: None
         self.reset_history()
         self.max_step_history = param['max_step_history']
         self.save_delay = param['save_delay']
@@ -38,12 +38,10 @@ class Boat():
         #print(f'{self.name} created')
 
     def update(self):
-        self.collision()
         if not self.target_reached:
-            self.nav_strat(self)
+            self.do_action()
             if distance(self.target, self.pos) < self.colRadius:
                 if len(self.next_targets) == 0:
-                    self.target = None
                     self.target_reached = True
                     self.cape = 0
                     self.gear = 0
@@ -53,9 +51,13 @@ class Boat():
             self.gear = 0
         self.update_angle()
         self.update_speed()
+        self.collision()
         if self.total_step % self.save_delay == 0:
             self.save_pos()
         self.total_step += 1
+
+    def do_action(self):
+        pass
 
     def update_speed(self):
         if self.engine_on:
@@ -91,6 +93,13 @@ class Boat():
         for t in targetList:
             self.next_targets.append(t)
 
+    def change_gear(self, increase=True):
+        if increase:
+            if self.gear < self.max_gear:
+                self.gear += 1
+        elif self.gear > 0:
+            self.gear -= 1
+
     def collision(self):
         for boat in self.boatList:
             if not boat is self:
@@ -105,8 +114,6 @@ class TRBoat(Boat):
     def __init__(self, param, initState, targets):
         super().__init__(param, initState, targets)
         self.common_nav_strat = follow_target
-        self.avoid_strat = go_right_maneuver
-        self.nav_strat = strat_or_maneuver
         self.maneuver = []
         self.phantom_advance = param['phantom_advance']
         self.phantom_boat = None
@@ -123,8 +130,13 @@ class TRBoat(Boat):
                 col, _ = prev_collision(self, b)
                 if col:
                     self.establish_maneuver()
-                    break
         super().update()
+
+    def do_action(self):
+        if len(self.maneuver) > 0:
+            self.cape = self.maneuver.pop()
+        else:
+            follow_target(self)
 
     def reset_phantom(self):
         #self.phantom_boat = PhantomBoat(self, self.phantom_advance)
@@ -134,7 +146,7 @@ class TRBoat(Boat):
 
     def establish_maneuver(self):
         if not self.target_reached:
-            self.avoid_strat(self)
+            go_right_maneuver(self)
             self.reset_phantom()
             return True
         return False
@@ -157,8 +169,6 @@ class PhantomBoat(Boat):
         self.mass = boat.mass
         self.cape = boat.cape
         self.dir = copy.copy(boat.dir)
-        self.common_nav_strat = boat.common_nav_strat
-        self.nav_strat = boat.nav_strat
         self.maneuver = copy.copy(boat.maneuver)
         self.reset_history()
         self.max_step_history = advance
@@ -166,6 +176,12 @@ class PhantomBoat(Boat):
         self.colRadius = boat.colRadius
         self.boatList = boat.boatList
         #print(f'Phantom of {self.name} created')
+
+    def do_action(self):
+        if len(self.maneuver) > 0:
+            self.cape = self.maneuver.pop()
+        else:
+            follow_target(self)
 
     def collision(self):
         pass
