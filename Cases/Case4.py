@@ -11,11 +11,11 @@ display = True
 # Environment definition
 targets = [(800, 300), (200, 300), (500, 200)]
 boats = []
-boat1 = buildBoat("BoatConfig/testboat.txt",
+boat1 = buildBoat("BoatConfig/LocTRBoat.txt",
                   {'pos': (200, 300), 'angle': -90, 'gear': 3}, [targets[0]], name="Titanic")
-boat2 = buildBoat("BoatConfig/testboat.txt",
+boat2 = buildBoat("BoatConfig/LocTRBoat.txt",
                   {'pos': (800, 300), 'angle': 90}, [targets[1]], name="CDG")
-boat3 = buildBoat("BoatConfig/testboat.txt",
+boat3 = buildBoat("BoatConfig/LocTRBoat.txt",
                   {'pos': (500, 600)}, [targets[2]], name="USS Thomas")
 boats.append(boat1)
 boats.append(boat2)

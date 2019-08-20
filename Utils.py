@@ -17,7 +17,12 @@ def angle_between(A, B):
     A_u = unit_vector(A)
     B_u = unit_vector(B)
     # Attention angle en radians
-    return np.arccos(np.clip(np.dot(A_u, B_u), -1.0, 1.0))
+    angle_abs = np.arccos(np.clip(np.dot(A_u, B_u), -1.0, 1.0))
+    if A[0]*B[1]-A[1]*B[0] >= 0:
+        angle = angle_abs
+    else:
+        angle = -angle_abs
+    return angle
 
 
 def scalar_to_coord_on_edge(rect, p):

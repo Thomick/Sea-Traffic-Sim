@@ -1,8 +1,8 @@
-ByName = False
+ByName = True
 # Possible name : Evenly_Opposite , RandomSpawner
 name = "Evenly_Opposite"
 
-showAll = False
+showAll = True
 nbCase = 4
 caseIndex = 1
 

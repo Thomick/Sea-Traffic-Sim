@@ -1,0 +1,10 @@
+20/08/19:
+->mise en pause du projet de bateau par DQN (progres d'apprentissage inexistant)
+->modification du bateau TurnRight pour ameliorer les performances et la clarte mais amelioration peu visible
+->correction Queue (peut-etre changer pour deque de collections)
+->restriction a un seule manoeuvre par collision distincte pour eviter les boucles infinie
+->mise a jour de prev_collision (plus d'option d'utilisation)
+
+TODO:
+->mise en place du distributed local search algorithm
+->technique pour eviter de recalculer tout la trajectoire a chaque changement

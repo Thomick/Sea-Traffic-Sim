@@ -1,9 +1,9 @@
-boatType = TRBoat
+boatType = LocTRBoat
 boatName = Titanic
 thrust_power = 70
 mass = 700
 max_step_history = 1000
 save_delay = 10
-colRadius = 20
-phantom_advance = 300
+colRadius = 30
+phantom_advance = 250
 max_gear = 2

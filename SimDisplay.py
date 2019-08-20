@@ -27,22 +27,22 @@ class SimDisplay():
             self.boatGroup.add(bSprite)
         self.targets = targets
         self.screen = pg.display.set_mode(self.screen_size)
-    
-    def step(self):
+
+    def step(self, draw_traj=False):
         self.screen.fill(WHITE)
         for boat in self.boatGroup:
             boat.draw_trajectory(self.screen)
 
         self.boatGroup.update()
-        '''
-        for b in self.boatGroup:
-            j = 0
-            for p in b.boat.phantom_boat.pastTrajectory:
-                if j % 100 == 0:
-                    pos = scale_convert_vector(p, self.scale_factor)
-                    pg.draw.circle(self.screen, BLUE, pos, 5)
-                j += 1
-        '''
+        if draw_traj:
+            for b in self.boatGroup:
+                j = 0
+                for p in b.boat.phantom_boat.pastTrajectory:
+                    if j % 10 == 0:
+                        pos = scale_convert_vector(p, self.scale_factor)
+                        pg.draw.circle(self.screen, BLUE, pos, 2)
+                    j += 1
+
         self.boatGroup.draw(self.screen)
         for t in self.targets:
             pos = scale_convert_vector(t, self.scale_factor)
@@ -54,7 +54,7 @@ class SimDisplay():
                 pass
         pg.display.flip()
 
-    def runSim(self, framerate = 60, nb_step = -1,pause_on_start = True):
+    def runSim(self, framerate=100, nb_step=-1, pause_on_start=True, draw_traj=False):
         done = False
         clock = pg.time.Clock()
         paused = False
@@ -68,13 +68,14 @@ class SimDisplay():
                         paused = not paused
 
             if not paused:
-                self.step()
+                self.step(draw_traj)
                 i += 1
             clock.tick(framerate)
             if pause_on_start and i == 1:
                 paused = True
             if i == nb_step:
                 done = True
+        print(f"Duree Sim : {i}")
         pg.quit()
 
 

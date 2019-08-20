@@ -1,5 +1,4 @@
 from Boats import *
-from RLStrategy import *
 
 
 def buildBoat(file, initState, targets, name=None):
@@ -14,9 +13,10 @@ def buildBoat(file, initState, targets, name=None):
 
     if param['boatType'] == 'BasicBoat':
         return Boat(param, defInitState, targets)
-    elif param['boatType'] == 'TRBoat':
-        return TRBoat(param, defInitState, targets)
+    elif param['boatType'] == 'LocTRBoat':
+        return LocTRBoat(param, defInitState, targets)
     elif param['boatType'] == 'DQNBoat':
+        from RLStrategy import DQNBoat
         return DQNBoat(param, defInitState, targets)
 
 

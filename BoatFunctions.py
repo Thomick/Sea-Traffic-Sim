@@ -11,15 +11,23 @@ def sprite_collide(boat_sprite1, boat_sprite2):
     return collide(boat_sprite1.boat, boat_sprite2.boat)
 
 
-def prev_collision(boat1, boat2, step=100):
+def prev_collision(boat1, boat2, step=0, nb_test=5):
     next_pos1 = boat1.phantom_boat.pastTrajectory.to_list()
     next_pos2 = boat2.phantom_boat.pastTrajectory.to_list()
     nb_pos = min(len(next_pos1), len(next_pos2)) - 1
-    j = 0
-    for i in range(nb_pos, 1, -step):
-        if distance(next_pos1[i], next_pos2[i]) < boat1.colRadius + boat2.colRadius:
-            return True, j
-        j += step
+    if step == -1:
+        pass
+    elif step == 0:
+        for i in range(1, nb_test + 1):
+            j = i * (nb_pos // (nb_test + 1))
+            if distance(next_pos1[j], next_pos2[j]) < boat1.colRadius + boat2.colRadius:
+                return True, j
+    else:
+        j = 0
+        for i in range(nb_pos, 1, -step):
+            if distance(next_pos1[i], next_pos2[i]) < boat1.colRadius + boat2.colRadius:
+                return True, j
+            j += step
     return distance(next_pos1[0], next_pos2[0]) < boat1.colRadius + boat2.colRadius, nb_pos
 
 

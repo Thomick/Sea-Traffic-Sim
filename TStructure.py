@@ -11,8 +11,8 @@ class Queue():
     length = 0
     max_length = -1
 
-    def __init__(self, lst=[], max_lentgh=None):
-        self.max_lentgh = max_lentgh
+    def __init__(self, lst=[], max_length=-1):
+        self.max_length = max_length
         if lst:
             for i in lst:
                 self.append(i)
