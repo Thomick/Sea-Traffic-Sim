@@ -1,3 +1,48 @@
+17/06/19:
+-> lancement officiel du projet informatique
+-> creation d'un premiere version du simulateur avec numpy et pygame
+
+19/06/19:
+->amelioration de la simulation en accord avec le todo
+->essai premature d'implementation d'une ia (laisse tombe car trop tot)
+->algorithme simple de pilotage en direction d'un point sans modification de la poussee du moteur (ameliore par la suite)
+
+03/07/19:
+->utilisation d'un vaisseau "phantome" suivant la meme strategie que l'original pour predire ses mouvements (mauvaise complexite mais convient dans les cas teste)
+->correction de bugs d'affichage (notament de la trajectoire prevue)
+->separation plus nette du moteur de simulation et de l'affichage
+->collision gere a part de l'affichage utilisant des boites de collision circulaires
+->anticipation des collisions en utilisant les bateaux phantomes
+
+04/07/19:
+->strategie d'evitement naive tourner a droite en vue d'un autre bateau
+->sauvegarde de certaines situation pour essai ulterieurs
+
+22/07/19:
+->modification du procede de creation des bateaux
+->utilisation d'un fichier config permettant de creer facilement de multiples types de bateaux instanciables
+->ajout d'un case launcher permettant de lancer les differents cas enregistres
+->generateur de situation aleatoires et echange de place dans un rectangle
+
+24/07/19:
+->debut mise en place d'un bateau utilisant DQN dans RLStrategy
+->utilisation de keras
+->difficulte installation tensorflow gpu (finalement plus long que cpu, peut-etre a cause des mini-batchs)
+->input simplifie issue du papier de recherche
+->simple dqn
+->optimisation des performances
+->entrainement sur tache simple pour valider le prototype
+
+->changment de simdisplay pour permettre de visualiser le nouveau bateau qui prend des decisions a chaque etape
+
+26/07/19:
+->les agents tendent a oublier ce qu'ils ont appris
+->correction de bug(ex: valeur angle compris entre 0 et pi au lieu de [-pi, pi])
+->double dqn pour plus de stabilite
+
+27/07/19
+->pas de resultat satisfaisant
+
 20/08/19:
 ->mise en pause du projet de bateau par DQN (progres d'apprentissage inexistant)
 ->modification du bateau TurnRight pour ameliorer les performances et la clarte mais amelioration peu visible
