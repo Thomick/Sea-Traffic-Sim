@@ -15,6 +15,8 @@ def buildBoat(file, initState, targets, name=None):
         return Boat(param, defInitState, targets)
     elif param['boatType'] == 'LocTRBoat':
         return LocTRBoat(param, defInitState, targets)
+    elif param['boatType'] == 'VectBoat':
+        return VectBoat(param, defInitState, targets)
     elif param['boatType'] == 'DQNBoat':
         from RLStrategy import DQNBoat
         return DQNBoat(param, defInitState, targets)

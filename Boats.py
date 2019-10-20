@@ -67,7 +67,7 @@ class Boat():
                 self.speed += 0.1 * self.thrust_power / self.mass * self.gear * self.dir
         speedNorm = np.linalg.norm(self.speed)
         # Frottements fluides
-        self.speed -= 10 * speedNorm * self.speed / self.mass
+        self.speed -= 20 * speedNorm * self.speed / self.mass
         self.pos = self.pos + self.speed
 
     def update_angle(self):
@@ -188,3 +188,42 @@ class PhantomBoat(Boat):
         self.dir = copy.copy(boat.dir)
         self.maneuver = copy.copy(boat.maneuver)
         self.reset_history()
+
+class VectBoat(Boat):
+    def __init__(self, param, initState, targets):
+        super().__init__(param, initState, targets)
+        self.vect = np.array([0,0])
+
+    def update(self):
+        self.calc_vect()
+        super().update()
+        
+    
+    def do_action(self):
+        det = self.dir[0]*self.vect[1] - self.dir[1]*self.vect[0]
+        if det > 0:
+            self.cape = 1
+        elif det < 0:
+            self.cape = -1
+        else: cape = 0.1
+    '''
+    def do_action(self):
+        det = self.dir[0]*self.vect[1] - self.dir[1]*self.vect[0]
+        ang = angle_between(self.dir,self.vect)
+        if -np.pi/2 < ang < np.pi/2:
+            self.cape = np.sin(ang)
+        elif ang < -np.pi/2:
+            self.cape = -1
+        else: self.cape = 1
+    '''
+    
+    def calc_vect(self):
+        self.vect = -1.5*unit_vector(self.target - self.pos)
+        for boat in self.boatList:
+            if not boat == self:
+                d = distance(self.pos,boat.pos)
+                V = boat.pos - self.pos
+                N = np.array([-boat.dir[1],boat.dir[0]])
+                if d < 150:
+                    self.vect = self.vect + 50*(V/d + boat.dir+N)/(d)
+                

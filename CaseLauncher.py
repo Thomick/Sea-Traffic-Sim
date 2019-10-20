@@ -1,10 +1,10 @@
-ByName = True
+ByName = False
 # Possible name : Evenly_Opposite , RandomSpawner
 name = "Evenly_Opposite"
 
-showAll = True
+showAll = False
 nbCase = 4
-caseIndex = 1
+caseIndex = 4
 
 if ByName:
     exec(open(f"Cases/" + name + ".py").read())

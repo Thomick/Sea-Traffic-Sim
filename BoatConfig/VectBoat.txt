@@ -1,0 +1,8 @@
+boatType = VectBoat
+boatName = Titanic
+thrust_power = 70
+mass = 700
+max_step_history = 1000
+save_delay = 10
+colRadius = 30
+max_gear = 2

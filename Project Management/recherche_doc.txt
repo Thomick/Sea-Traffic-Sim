@@ -1,4 +1,4 @@
-Organisation maritime internationale: http://www.imo.org/FR/Pages/Default.aspx
+﻿Organisation maritime internationale: http://www.imo.org/FR/Pages/Default.aspx
 RIPAM / COLREG : https://fr.wikipedia.org/wiki/R%C3%A8glement_international_pour_pr%C3%A9venir_les_abordages_en_mer
 
 Affichage en temps réel du trafic maritime mondial (Peut donner des situations réelles): http://www.pilotage-maritime.nc/ais.php
@@ -8,7 +8,7 @@ Accident recent. Abordage d'un porte conteneur au large de la corse: https://www
 Etude comportement dynamique des bateaux: https://cel.archives-ouvertes.fr/cel-00749325/document
 Explixcations synthetique d'hydraudynamique navale :https://www.mecaflux.com/hydrodynamique_navale.htm
 Nombreuses références vers des papiers antérieurs : https://link.springer.com/article/10.1023/A:1022693600078
-Dynamique du voilié(A CREUSER): https://hal.archives-ouvertes.fr/hal-00453730/document
+Dynamique du voilier(A CREUSER): https://hal.archives-ouvertes.fr/hal-00453730/document
 Sur les forces de trainée: https://fr.wikipedia.org/wiki/Tra%C3%AEn%C3%A9e
 Discution superficielles de simulation navale: https://gamedev.stackexchange.com/questions/13564/simple-physics-for-modelling-ship-submarine-movement
 Ship Motion simulation system(TOO COMPLEX): https://www.researchgate.net/publication/220530135_A_ship_motion_simulation_system

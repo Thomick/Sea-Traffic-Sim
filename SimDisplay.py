@@ -46,7 +46,7 @@ class SimDisplay():
         self.boatGroup.draw(self.screen)
         for t in self.targets:
             pos = scale_convert_vector(t, self.scale_factor)
-            pg.draw.circle(self.screen, RED, pos, 5)
+            pg.draw.circle(self.screen, BLUE, pos, 30, 3)
 
         for b in self.boats:
             if b.isColliding:
