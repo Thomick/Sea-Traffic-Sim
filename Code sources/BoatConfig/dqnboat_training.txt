@@ -1,0 +1,11 @@
+boatType = DQNBoat
+boatName = Titanic
+thrust_power = 70
+mass = 700
+max_step_history = 1000
+save_delay = 10
+colRadius = 20
+max_gear = 2
+icon_path = Images/small_red.png
+color = RED
+priority = 1

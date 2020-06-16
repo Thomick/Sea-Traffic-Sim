@@ -1,0 +1,12 @@
+boatType = LocTRBoat
+boatName = Titanic
+thrust_power = 70
+mass = 700
+max_step_history = 1000
+save_delay = 10
+colRadius = 30
+phantom_advance = 250
+max_gear = 2
+icon_path = Images/small_blue.png
+color = BLUE
+priority = 1

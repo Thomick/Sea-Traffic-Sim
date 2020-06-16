@@ -1,0 +1,41 @@
+Organisation maritime internationale: http://www.imo.org/FR/Pages/Default.aspx
+RIPAM / COLREG : https://fr.wikipedia.org/wiki/R%C3%A8glement_international_pour_pr%C3%A9venir_les_abordages_en_mer
+
+Affichage en temps réel du trafic maritime mondial (Peut donner des situations réelles): http://www.pilotage-maritime.nc/ais.php
+
+Accident recent. Abordage d'un porte conteneur au large de la corse: https://www.youtube.com/watch?v=VSkSSIitkEk
+
+Etude comportement dynamique des bateaux: https://cel.archives-ouvertes.fr/cel-00749325/document
+Explications synthetique d'hydraudynamique navale :https://www.mecaflux.com/hydrodynamique_navale.htm
+Nombreuses références vers des papiers antérieurs : https://link.springer.com/article/10.1023/A:1022693600078
+Dynamique du voilier(A CREUSER): https://hal.archives-ouvertes.fr/hal-00453730/document
+Sur les forces de trainée: https://fr.wikipedia.org/wiki/Tra%C3%AEn%C3%A9e
+Discution superficielles de simulation navale: https://gamedev.stackexchange.com/questions/13564/simple-physics-for-modelling-ship-submarine-movement
+Ship Motion simulation system(TOO COMPLEX): https://www.researchgate.net/publication/220530135_A_ship_motion_simulation_system
+
+Calcul resistance eau: https://www.ilephysique.net/sujet-trajectoire-d-un-navire-soumis-aux-frottements-de-l-eau-226588.html
+Inertie d'un bateau(Erre): https://www.youtube.com/watch?v=LSgWUyHKl4s
+Cours: https://www.ladissertation.com/Monde-du-Travail/Flexibilite-du-Travail/LINERTIE-DU-NAVIRE-287638.html
+
+Simulation très proche de l'objectif: (!!!!) https://www-sciencedirect-com.lama.univ-amu.fr/science/article/pii/S0029801811002514
+Autonomous Ship Collision Avoidance Navigation Concepts, Technologies and Techniques: https://www-cambridge-org.lama.univ-amu.fr/core/journals/journal-of-navigation/article/autonomous-ship-collision-avoidance-navigation-concepts-technologies-and-techniques/3F3ED13DEFF7B84B5B0A758BEBF47ADD
+Résumé techniques possibles: https://www.witpress.com/elibrary/wit-transactions-on-ecology-and-the-environment/45/4661
+
+Evitement d'obstacles fixes par l'utilisation de champs de vecteur: http://publish.illinois.edu/dpanagou/files/2014/07/Panagou_ICRA_14.pdf
+!Un autre : A fuzzy logic for autonomous navigation of marine vehicle satisfying COLREG guidelines
+##### Differential game modelisation #####
+(!!!)https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7909033
+Optimisation des trajectoires par résolution d'équations différentielles: http://www.mic-journal.no/PDF/1982/MIC-1982-4-2.pdf (Plus vieux papier 1982)
+
+Utilisation de logique floue(fuzzy logic)(Lien NN) dans la réalisation de stratégies d'évitement : https://www.hindawi.com/journals/afs/2018/2367096/
+
+Maritime Trajectory Negotiation forn-Vessel Collision Avoidance: https://uol.de/fileadmin/user_upload/informatik/hormar16.pdf
+
+Tabu search: https://explore.openaire.eu/search/publication?articleId=doajarticles::d1cd604573689ff1b75c22a0070dfa1c
+
+Même problematique pour des drones aeriens: https://www.researchgate.net/publication/273277742_Collision_avoidance_for_aerial_vehicles_in_multi-agent_scenarios
+
+(!!!!!)Deep RL Evitement de collision decentralisé sans communication: 
+https://arxiv.org/pdf/1609.07845.pdf
+
+Optimal Reciprocal Collision Avoidance : http://gamma.cs.unc.edu/ORCA/publications/ORCA.pdf
