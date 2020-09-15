@@ -28,17 +28,18 @@ A inclure dans la simulation:
 -> Utilisation plus facile : fichier config pour les différentes configurations testées(Editeur de scene)
 
 Après fin création de l'environnement:
--> Créer situations types
+-> Créer situations types OK
 
 -> Implémenter stratégies:
     0) Commandes basiques :
         Aller au point (Commande progressive en fonction de l'angle) OK
-    1) Règles RIPAM (solution naive : si collision future, detournement de la trajectoire)
-    2) Par résolution d'équation différentiel
+    1) Règles RIPAM (solution naive : si collision future, detournement de la trajectoire) OK
+    2) Par résolution d'équation différentiel NON
+    3) Champ de vecteurs OK
     3) Tabu search (voir doc)
     4) Apprentissage machine
 
--> Visualisations variables (matplotlib)
+-> Visualisations variables (matplotlib) OK
 
 -> Classes de bateaux dérivés: par stratégie et par taille ou lecture du fichier config passé en parametre
 

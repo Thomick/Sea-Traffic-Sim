@@ -7,7 +7,7 @@ nbCase = 4
 caseIndex = 2
 
 if ByName:
-    exec(open(f"Cases/" + name + ".py").read())
+    exec(open(f"Cases/{name}.py").read())
 else:
     if showAll:
         for i in range(1, nbCase + 1):

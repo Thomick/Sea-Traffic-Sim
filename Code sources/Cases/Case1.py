@@ -1,9 +1,5 @@
-from Boats import *
-from BoatConstructor import *
-from BoatFunctions import *
-from Utils import *
-from Strategies import *
-from SimDisplay import *
+from BoatConstructor import buildBoat
+from SimDisplay import SimDisplay
 
 # Display sim
 display = True

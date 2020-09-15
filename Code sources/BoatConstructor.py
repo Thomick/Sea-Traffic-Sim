@@ -1,4 +1,4 @@
-from Boats import *
+from Boats import Boat, LocTRBoat, VectBoat
 
 
 def buildBoat(file, initState={}, targets=[], name=None, add_param={}):
@@ -20,7 +20,9 @@ def buildBoat(file, initState={}, targets=[], name=None, add_param={}):
     elif param['boatType'] == 'VectBoat':
         return VectBoat(param, defInitState, targets)
     elif param['boatType'] == 'DQNBoat':
-        from RLStrategy import DQNBoat
+        #from RLStrategy import DQNBoat
+        # return DQNBoat(param, defInitState, targets)
+        from RLStrategySimplified import DQNBoat
         return DQNBoat(param, defInitState, targets)
 
 

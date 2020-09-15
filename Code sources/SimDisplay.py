@@ -1,16 +1,13 @@
-from Boats import *
-from Utils import *
-from BoatFunctions import *
+from Utils import scale_convert_vector
 import pygame as pg
-from pygame.locals import *
-import time
-from VectorFieldViewer import *
+from VectorFieldViewer import plot_vectorfield
+import os
 
-c = {"BLACK" : (0, 0, 0),
-"WHITE" : (255, 255, 255),
-"RED" : (255, 0, 0),
-"GREEN" : (0, 255, 0),
-"BLUE" : (0, 0, 255)}
+c = {"BLACK": (0, 0, 0),
+     "WHITE": (255, 255, 255),
+     "RED": (255, 0, 0),
+     "GREEN": (0, 255, 0),
+     "BLUE": (0, 0, 255)}
 
 
 class SimDisplay():
@@ -62,12 +59,12 @@ class SimDisplay():
         i = 0
         while not done:
             for event in pg.event.get():
-                if event.type == QUIT:
+                if event.type == pg.QUIT:
                     done = True
-                elif event.type == KEYDOWN:
-                    if event.key == K_p:
+                elif event.type == pg.KEYDOWN:
+                    if event.key == pg.K_p:
                         paused = not paused
-                    elif vector_field and event.key == K_v:
+                    elif vector_field and event.key == pg.K_v:
                         plot_vectorfield(
                             self.boats, self.screen_size, self.screen_size[0] // 30)
 
@@ -87,7 +84,8 @@ class BoatSprite(pg.sprite.Sprite):
     def __init__(self, filepath, scale_factor, boat, scale_icon=False):
         super().__init__()
         self.boat = boat
-        self.icon_path = self.boat.icon_path
+        self.icon_path = os.path.join(os.path.dirname(
+            __file__), self.boat.icon_path)
         self.color = c[self.boat.color]
         self.scale_factor = scale_factor
         self.size = int(self.boat.colRadius * self.scale_factor)

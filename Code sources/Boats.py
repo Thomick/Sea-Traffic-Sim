@@ -1,8 +1,8 @@
 import numpy as np
-from Utils import *
+from Utils import distance, unit_vector
 from TStructure import Queue
-from Strategies import *
-from BoatFunctions import *
+from Strategies import follow_target
+from BoatFunctions import collide, prev_collision, gen_vect
 import copy
 
 
@@ -78,7 +78,7 @@ class Boat():
         if self.engine_on:
             self.angular_speed += 2 * self.thrust_power * self.cape / self.mass * self.gear
         # Couple resistant
-        self.angular_speed -= self.lambd/ self.mass * self.angular_speed
+        self.angular_speed -= self.lambd / self.mass * self.angular_speed
         self.angle += self.angular_speed
         angleRad = (self.angle + 90) * np.pi / 180
         self.dir = np.array([np.cos(angleRad), -np.sin(angleRad)])
@@ -90,7 +90,7 @@ class Boat():
         self.total_step = 0
         self.pastTrajectory = Queue(max_length=self.max_step_history)
 
-    def add_target(targetList):
+    def add_target(self, targetList):
         self.target_reached = False
         for t in targetList:
             self.next_targets.append(t)
@@ -210,7 +210,7 @@ class VectBoat(Boat):
         elif det < 0:
             self.cape = -1
         else:
-            cape = 0.1
+            self.cape = 0.1
     '''
     def do_action(self):
         det = self.dir[0]*self.vect[1] - self.dir[1]*self.vect[0]

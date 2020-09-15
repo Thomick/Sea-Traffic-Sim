@@ -1,12 +1,9 @@
 import matplotlib.pyplot as plt
-from BoatConstructor import *
-from BoatFunctions import *
+from BoatFunctions import gen_vect
 import numpy as np
 
 
 def get_vectors(boats, screen_size, sample_length):
-    #b = buildBoat("BoatConfig/VectBoat.txt")
-    #b.boatList = boats
     x = np.arange(0, screen_size[0], sample_length)
     y = np.arange(0, screen_size[1], sample_length)
     X, Y = np.meshgrid(x, y)
@@ -38,9 +35,9 @@ def get_vectors(boats, screen_size, sample_length):
 def plot_vectorfield(boats, screen_size, sample_length):
     X, Y, U, V, C = get_vectors(boats, screen_size, sample_length)
     fig, ax = plt.subplots()
-    q = ax.quiver(X, Y, U, V, C)
+    _ = ax.quiver(X, Y, U, V, C)
     xb = [b.pos[0] for b in boats]
     yb = [b.pos[1] for b in boats]
-    p = ax.scatter(xb, yb)
+    _ = ax.scatter(xb, yb)
     ax.set_aspect('equal')
     plt.show()

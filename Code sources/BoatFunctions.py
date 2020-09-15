@@ -1,6 +1,5 @@
-from Boats import *
 import numpy as np
-from Utils import *
+from Utils import distance
 
 
 def collide(boat1, boat2):

@@ -1,9 +1,7 @@
-from Boats import *
-from BoatConstructor import *
-from BoatFunctions import *
-from Utils import *
-from Strategies import *
-from SimDisplay import *
+from BoatConstructor import buildBoat
+from SimDisplay import SimDisplay
+from Utils import random_point_on_edge
+import numpy as np
 
 # Display sim
 display = True
@@ -18,7 +16,9 @@ boats = []
 for i in range(nbBoat):
     targets.append(random_point_on_edge(screen_rect))
     boats.append(buildBoat("BoatConfig/LocTRBoat.txt",
-                           {'pos': random_point_on_edge(screen_rect), 'angle': int(np.random.random() * 360 - 180)}, [targets[i]], name=str(i)))
+                           {'pos': random_point_on_edge(screen_rect),
+                            'angle': int(np.random.random() * 360 - 180)},
+                           [targets[i]], name=str(i)))
 for b in boats:
     b.boatList = boats
 

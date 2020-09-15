@@ -44,11 +44,20 @@
 ->pas de resultat satisfaisant
 
 20/08/19:
-->mise en pause du projet de bateau par DQN (progres d'apprentissage inexistant)
+->mise en pause du projet de bateau par Deep Q learning (progres d'apprentissage inexistant)
 ->modification du bateau TurnRight pour ameliorer les performances et la clarte mais amelioration peu visible
 ->correction Queue (peut-etre changer pour deque de collections)
 ->restriction a un seule manoeuvre par collision distincte pour eviter les boucles infinie
 ->mise a jour de prev_collision (plus d'option d'utilisation)
+
+fin 2019
+->mise à jour du rendu pour plus de clarté
+->Ajout de visualisation et de méthode de collecte de données (distance d'approche minimale, quantification de la rotation (sujet à minimisation pour le confort des passagers), du détour)
+->Visualisation du champs de vecteur correspondant à la stratégie du même nom
+->Ajustement des constantes pour une première présentation des résultats
+
+fin mars 2020
+->arrêt du projet pour cause d'annulation de la présentation du TIPE
 
 TODO:
 ->mise en place du distributed local search algorithm
