@@ -10,7 +10,7 @@ import numpy as np
 import time
 import os
 
-
+#Classe des bateaux dont les actions sont dictées par le un agent DQN
 class DQNBoat(Boat):
     def __init__(self, param, initState, targets):
         super().__init__(param, initState, targets)
@@ -70,6 +70,7 @@ class DQNBoat(Boat):
             self.change_gear(increase=False)
 
 
+#Implementation du DQN
 class DQNAgent():
     def __init__(self, model=None, from_file=False):
         self.memory = deque(maxlen=10000)
@@ -149,6 +150,7 @@ class DQNAgent():
         self.target_model.set_weights(self.model.get_weights())
 
 
+#Compilation des données connues par l'agent vers un vecteur d'entrée du réseau de neuronnes
 def get_state(boat, other_boat):
     # State minimalist a etoffer pour une generalisation
     rot_angle = angle_between(np.array([1, 0]), boat.target)
@@ -172,6 +174,7 @@ def get_state(boat, other_boat):
     return np.array(cur_state).reshape((1, 9))
 
 
+#Initialisation d'un environnement de simulation pour l'entrainement
 def init_scene(agent):
     boats = []
     boats.append(buildBoat(os.path.join(os.path.dirname(__file__), "BoatConfig", "dqnboat_training.txt"),
