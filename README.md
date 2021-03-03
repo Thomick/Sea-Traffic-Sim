@@ -1,24 +1,25 @@
 # Sea-Traffic-Sim
-Code source du projet de TIPE de Thomas MICHEL : Stratégie et simulation d'évitement de collision en mer
-Ce projet comprend la simulation d'un environnement de navigation (implémenté par une boucle de mise à jour d'instances de classes héritant de "boat"), ainsi que différentes stratégies d'évitement de collision.
+Code source du projet de TIPE de Thomas MICHEL : Stratégie et simulation d'évitement de collision en mer.
 
-###Le projet est actuellement arrêté suite à l’annulation de l’épreuve de TIPE en raison de crise sanitaire. Le code n’est en l’état pas fonctionnel (nécessite des modification de code source pour passer d’un algorithme à l’autre ou bien changer la configuration des bateaux) mais sera mis en ordre dès que possible.
+Ce projet comprend la simulation d'un environnement de navigation, ainsi que différentes stratégies d'évitement de collision.
+
+###Le projet est actuellement arrêté suite à l’annulation de l’épreuve de TIPE en raison de crise sanitaire. Le code n’est en l’état pas fonctionnel (nécessite des modifications du code source pour passer d’un algorithme à l’autre ou bien changer la configuration des bateaux) mais sera mis en ordre dès que possible.
 
 Voici quelques indications sur les différents fichiers :
-Caselauncher.py permet de visualiser certaines configurations préenregistrées
-Boats.py implémente l’ensemble des bateaux possibles (chaque bateau correspond à une stratégie)
-Simdisplay.py gère l’affichage
-RLStrategie.py implémente l’algorithme de double DQN appliqué au problème considéré
-Boatbuilder.py crée des instances de bateau à partir de fichiers de configuration
-Les autres fichiers sont essentiellement des fonctions utilitaires ou des fichiers relatifs à la gestion de projet de TIPE
+- Caselauncher.py permet de visualiser certaines configurations préenregistrées
+- Boats.py implémente l’ensemble des bateaux possibles (chaque bateau correspond à une stratégie)
+- Simdisplay.py gère l’affichage
+- RLStrategie.py implémente l’algorithme de double DQN appliqué au problème considéré
+- Boatbuilder.py crée des instances de bateau à partir de fichiers de configuration
+- Les autres fichiers sont essentiellement des fonctions utilitaires ou des fichiers relatifs à la gestion de projet de TIPE
 
 Les algorithmes actuellement implémentés sont :
-- Algorithme simple de contournement (Dit de "réaction" lorsqu’une collision prochaine es détectée)
+- Algorithme simple de contournement (Détecte des collisions entre les trajectoires prévues par les différents agents et tente de réagir par une modification de la trajectoire sans concertation avec les autres agents (contournement par la droite))
 - Algorithme du "champ de vecteurs"
 - Recherche locale de minimum (optimisation locale des trajectoires par communication entre les bateaux)
-- Apprentissage par renforcement (Non entraîné ici)
+- Apprentissage par renforcement (Double Deep Q-Learning)
 
-Les stratégies sont largement inspirées des articles suivants
+Les stratégies sont inspirées des articles suivants
 - R. SKJONG, K. M. MJELDE : Optimal evasive manoeuvre for a ship in an environment of a fixed
 installations and other ships : 1982, Modeling, Identification and Control , vol.3, no. 4, 211-222
 - D.-G. KIM, K. HIRAYAMA, T. OKIMOTO : Ship Collision Avoidance by Distributed Tabu Search :
