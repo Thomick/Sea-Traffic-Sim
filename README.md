@@ -9,7 +9,7 @@ Voici quelques indications sur les différents fichiers :
 - Caselauncher.py permet de visualiser certaines configurations préenregistrées
 - Boats.py implémente l’ensemble des bateaux possibles (chaque bateau correspond à une stratégie)
 - Simdisplay.py gère l’affichage
-- RLStrategie.py implémente l’algorithme de double DQN appliqué au problème considéré
+- RLStrategie.py implémente un apprentissage par renforcement par Double Deep Q-Learning appliqué au problème considéré
 - Boatbuilder.py crée des instances de bateau à partir de fichiers de configuration
 - Les autres fichiers sont essentiellement des fonctions utilitaires ou des fichiers relatifs à la gestion de projet de TIPE
 
